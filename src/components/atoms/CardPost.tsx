@@ -6,7 +6,7 @@ type Props = {}
 
 const CardPost = (props: Props) => {
     return (
-        <div className='rounded-lg cursor-pointer hover:scale-105 transition-all ease-linear duration-300 w-56 md:w-72 bg-white shadow-xl'>
+        <div className='rounded-lg cursor-pointer hover:scale-105 transition-all ease-linear duration-300 w-56 md:w-72 bg-white dark:bg-[#333333] shadow-xl'>
             <Image src={"/images/fullstackdev.png"} alt='Fullstack Development' height={200} width={200} className='w-full rounded-t-lg' />
             <div className="p-4 w-full">
                 <div className="text-xl font-bold">Pengenalan Node JS dan JavaScript Sebagai Backend </div>

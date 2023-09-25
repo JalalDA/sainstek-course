@@ -6,7 +6,7 @@ type Props = {}
 
 const Galery = (props: Props) => {
   return (
-    <div className='bg-white h-screen'>
+    <div className='bg-white h-screen dark:bg-[#333333]'>
         <Head><title>Galery</title></Head>
         <Navbar/>
     </div>

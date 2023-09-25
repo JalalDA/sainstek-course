@@ -8,7 +8,7 @@ type Props = {}
 
 const About = (props: Props) => {
   return (
-    <div className='bg-white'>
+    <div className='bg-white dark:bg-[#333333]'>
         <Head><title>Tentang Kami</title></Head>
         <Navbar/>
         <div className="p-16">
@@ -25,13 +25,13 @@ const About = (props: Props) => {
           <div className="text-xl font-bold mt-16">Kritik Dan Saran</div>
           <div className="text-md mt-4">Kritik dan saran kamu bakal berguna banget buat kemajuan kami lo </div>
           <form className='w-1/2'>
-            <div className="mt-4 border border-gray-200 bg-gray-200 rounded-lg p-2">
-              <input className='outline-none bg-gray-200' type="text" placeholder='Nama kamu . . .'/>
+            <div className="mt-4  bg-gray-200 dark:bg-gray-500 rounded-lg p-2">
+              <input className='outline-none bg-gray-200 dark:bg-gray-500' type="text" placeholder='Nama kamu . . .'/>
             </div>
-            <div className="mt-4 border border-gray-200 bg-gray-200 rounded-lg p-2">
-              <input className='outline-none bg-gray-200' type="text" placeholder='Alamat kamu . . .'/>
+            <div className="mt-4 dark:bg-gray-500 bg-gray-200 rounded-lg p-2">
+              <input className='outline-none dark:bg-gray-500' type="text" placeholder='Alamat kamu . . .'/>
             </div>
-            <textarea className='bg-gray-200 p-2 mt-4 w-full rounded-lg mb-4' placeholder='Tulis saran kamu disini' cols={10} rows={20}></textarea>
+            <textarea className='bg-gray-200 dark:bg-gray-500 p-2 mt-4 w-full rounded-lg mb-4 outline-none' placeholder='Tulis saran kamu disini' cols={10} rows={20}></textarea>
             <Button title='Kirim'/>
           </form>
         </div>
