@@ -11,7 +11,7 @@ const About = (props: Props) => {
     <div className='bg-white dark:bg-[#333333]'>
         <Head><title>Tentang Kami</title></Head>
         <Navbar/>
-        <div className="p-16">
+        <div className="p-4 md:p-16">
           <div className="text-xl font-bold">Tentang Kami</div>
           <div className="tex-md font-light mt-4">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa voluptatibus saepe dolorum tenetur recusandae, corrupti beatae perferendis necessitatibus quasi suscipit reiciendis dolor? Quo libero, natus enim iure quod placeat voluptates.
@@ -24,7 +24,7 @@ const About = (props: Props) => {
           </div>
           <div className="text-xl font-bold mt-16">Kritik Dan Saran</div>
           <div className="text-md mt-4">Kritik dan saran kamu bakal berguna banget buat kemajuan kami lo </div>
-          <form className='w-1/2'>
+          <form className='md:w-1/2 w-full'>
             <div className="mt-4  bg-gray-200 dark:bg-gray-500 rounded-lg p-2">
               <input className='outline-none bg-gray-200 dark:bg-gray-500' type="text" placeholder='Nama kamu . . .'/>
             </div>

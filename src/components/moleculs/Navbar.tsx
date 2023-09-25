@@ -49,7 +49,7 @@ const Navbar = (props: Props) => {
                 </div>
             </div>
             <FaListUl onClick={()=>{setIsOpen(!isOpen)}} className="md:hidden" />
-            <div className={`w-2/3 ${!isOpen && "opacity-0"} md:hidden absolute flex-col top-20 h-[24rem] transition-all ease-linear duration-300 ${isOpen ? "right-0" : "-right-2/3"} bg-white shadow-xl gap-y-8 p-4 items-start justify-start`}>
+            <div className={`w-2/3 ${!isOpen && "opacity-0"} md:hidden absolute flex-col top-20 h-[24rem] transition-all ease-linear duration-300 ${isOpen ? "right-0" : "-right-2/3"} bg-white dark:bg-[#333333] shadow-xl gap-y-8 p-4 items-start justify-start`}>
                 <div className="flex flex-col items-start justify-start gap-4 ">
                     {
                         navItems.map((item, index) => (
