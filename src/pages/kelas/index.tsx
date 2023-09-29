@@ -2,13 +2,15 @@ import CardKelas from '@/components/atoms/CardKelas'
 import Fasilitas from '@/components/moleculs/Fasilitas'
 import Footer from '@/components/moleculs/Footer'
 import Navbar from '@/components/moleculs/Navbar'
-import TabKelas from '@/components/moleculs/TabKelas'
+import axios from 'axios'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 type Props = {}
 
-const Kelas = (props: Props) => {
+const Kelas = ({repo}:InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const tabKelas = [
         {
             name : "Semua",
@@ -28,6 +30,7 @@ const Kelas = (props: Props) => {
         },
     ]
     const [isActive, setIsActive] = useState("Semua")
+    const router = useRouter()
     return (
         <div className='bg-white dark:bg-[#333333]'>
             <Head><title>Kelas</title></Head>
@@ -43,16 +46,11 @@ const Kelas = (props: Props) => {
                     }
                 </div>
                 <div className="grid mt-8 grid-cols-2 md:grid-cols-4 gap-x-4 gap-8">
-                    <CardKelas/>
-                    <CardKelas/>
-                    <CardKelas/>
-                    <CardKelas/>
-                    <CardKelas/> 
-                    <CardKelas/>
-                    <CardKelas/>
-                    <CardKelas/>
-                    <CardKelas/>
-                    <CardKelas/>
+                    {
+                        repo.map((item, index)=>(
+                            <CardKelas onClick={()=>router.push(`kelas/${item._id}`)} items={item} key={index}/>
+                        ))
+                    }
                 </div>
             </div>
             <Footer/>
@@ -61,3 +59,11 @@ const Kelas = (props: Props) => {
 }
 
 export default Kelas
+
+
+export const getServerSideProps: GetServerSideProps<{
+    repo: any[]
+  }> = async () => {
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_APP_HOST}/api/kelas`)
+    return { props: { repo : data.data } }
+  }

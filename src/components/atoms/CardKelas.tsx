@@ -1,24 +1,30 @@
 import React from 'react'
 import Image from 'next/image'
-import { FaStar } from 'react-icons/fa6'
+// import { FaStar } from 'react-icons/fa6'
+import { OnlineClass } from '@/types'
+import styles from './styles.module.css'
+import { formatter } from '@/config/formatter'
 
-type Props = {}
+type Props = {
+    items : OnlineClass;
+    onClick?: ()=>void;
+}
 
-const CardKelas = (props: Props) => {
+const CardKelas = ({items, onClick}: Props) => {
     return (
-        <div className='rounded-lg cursor-pointer hover:scale-105 transition-all ease-linear duration-300 w-56 md:w-72 bg-white dark:bg-[#333333] shadow-xl'>
-            <Image src={"/images/fullstackdev.png"} alt='Fullstack Development' height={200} width={200} className='w-full rounded-t-lg' />
+        <div onClick={onClick} className='rounded-lg cursor-pointer hover:scale-105 transition-all ease-linear duration-300 w-48 md:w-72 bg-white dark:bg-[#333333] shadow-xl'>
+            <Image src={items.thumbnailURL} alt='Fullstack Development' height={100} width={100} className='w-full rounded-t-lg' />
             <div className="p-4 w-full">
-                <div className="text-xl font-bold">Fullstack Web Development (JavaScript) </div>
-                <div className="text-md mt-2">Javascript merupakan salah satu bahasa pemrograman yang sangat populer di dunia. Hal ini tidak terlepas dari kemudahan dalam mempelajarinya dan juga fleksibilitasnya yang dapat digunakan untuk mendevelop berbagai macam aplikasi termasuk aplikasi web, baik dari sisi frontend maupun backend</div>
+                <div className="text-md font-bold">{items.title}</div>
+                <div className={`line-clamp-4 text-md mt-2`}>{items.description}</div>
                 <div className="mt-2 flex items-center justify-between w-full">
-                    <div className="flex items-center gap-x-4">
+                    {/* <div className="flex items-center gap-x-4">
                         <FaStar className="text-yellow-400" />
                         4.8
-                    </div>
+                    </div> */}
                     <div className="flex flex-col">
                         <div className="line-through text-sm text-red-500">IDR 1.000.000</div>
-                        <div className="text-md font-bold text-blue-500 ">IDR 500.000</div>
+                        <div className="text-md font-bold text-blue-500 ">{formatter(items.price)}</div>
                     </div>
                 </div>
             </div>

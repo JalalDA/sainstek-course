@@ -26,10 +26,10 @@ const About = (props: Props) => {
           <div className="text-md mt-4">Kritik dan saran kamu bakal berguna banget buat kemajuan kami lo </div>
           <form className='md:w-1/2 w-full'>
             <div className="mt-4  bg-gray-200 dark:bg-gray-500 rounded-lg p-2">
-              <input className='outline-none bg-gray-200 dark:bg-gray-500' type="text" placeholder='Nama kamu . . .'/>
+              <input className='outline-none bg-gray-200 dark:bg-gray-500 w-full' type="text" placeholder='Nama kamu . . .'/>
             </div>
             <div className="mt-4 dark:bg-gray-500 bg-gray-200 rounded-lg p-2">
-              <input className='outline-none dark:bg-gray-500' type="text" placeholder='Alamat kamu . . .'/>
+              <input className='outline-none bg-gray-200 dark:bg-gray-500 w-full' type="text" placeholder='Alamat kamu . . .'/>
             </div>
             <textarea className='bg-gray-200 dark:bg-gray-500 p-2 mt-4 w-full rounded-lg mb-4 outline-none' placeholder='Tulis saran kamu disini' cols={10} rows={20}></textarea>
             <Button title='Kirim'/>

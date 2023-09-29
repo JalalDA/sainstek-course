@@ -1,4 +1,4 @@
-import Navbar from '@/components/moleculs/Navbar'
+import Navbar from '@/components/moleculs/NavbarSec'
 import Head from 'next/head'
 import React from 'react'
 

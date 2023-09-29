@@ -1,14 +1,12 @@
-import Image from 'next/image'
-import { Inter, Poppins } from 'next/font/google'
-import Navbar from '@/components/moleculs/Navbar'
+import { Poppins } from 'next/font/google'
 import HeroSection from '@/components/moleculs/HeroSection'
 import Fasilitas from '@/components/moleculs/Fasilitas'
 import Head from 'next/head'
 import Features from '@/components/moleculs/Features'
 import Cta from '@/components/moleculs/Cta'
 import Footer from '@/components/moleculs/Footer'
+import Navbar from '@/components/moleculs/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
 const popins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700'] })
 
 export default function Home() {
