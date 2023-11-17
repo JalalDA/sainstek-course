@@ -3,21 +3,49 @@ import Fasilitas from '@/components/moleculs/Fasilitas'
 import Footer from '@/components/moleculs/Footer'
 import Navbar from '@/components/moleculs/Navbar'
 import { formatter } from '@/config/formatter'
+import { RootState } from '@/store/reducers'
 import { OnlineClass } from '@/types'
 import axios from 'axios'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 
 const SingleKelas = ({repo}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [isActive, setIsActive] = useState("Semua")
+    const [isLoadingPay, setIsLoadingPay] = useState(false)
     const router = useRouter()
     const startDate = new Date(repo.startDate)
     const formatedStartDate = startDate.toISOString().split("T")[0]
     const endDate = new Date(repo.endDate)
     const formatedEndDate = endDate.toISOString().split("T")[0]
+    const user = useSelector((state:RootState)=>state.user.user)
+
+    const bayar = async () => {
+        setIsLoadingPay(true)
+        try {
+            const {_id, email, username} = user
+            const data = await axios.post(`${process.env.NEXT_PUBLIC_APP_HOST}/api/transaction`, {
+                gross_amount: repo.price,
+                email,
+                id : _id,
+                first_name : username,
+                last_name : username,
+                kelasId : repo._id
+            })
+            if(data.status === 200){
+            //   dispatch(emptyCart([]))
+            }
+            const url = data?.data?.data?.redirect_url
+            window.open(`${url}`, "_blank")
+            router.push('/profile')
+        } catch (error) {
+            console.log({ error });
+        }
+        setIsLoadingPay(false)
+    }
     return (
         <div className='bg-white dark:bg-[#333333]'>
             <Head><title>Kelas</title></Head>
@@ -38,7 +66,7 @@ const SingleKelas = ({repo}: InferGetServerSidePropsType<typeof getServerSidePro
                             <div className="text-md mt-2">Berakhir Kelas : {formatedEndDate}</div>
                             <div className="text-md mt-2">Trainer Kelas : {repo.instructor}</div>
                             <div className="text-md mt-2 mb-4">Jadwal Kelas : {repo.schedule}</div>
-                            <ButtonLoading onClick={()=>{}} buttonText='Beli Sekarang' isLoading={false}/>
+                            <ButtonLoading onClick={bayar} buttonText='Beli Sekarang' isLoading={isLoadingPay}/>
                         </div>
                     </div>
                 </div>

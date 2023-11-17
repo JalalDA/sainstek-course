@@ -32,14 +32,14 @@ const Layout = ({
 
     const authState = useSelector((state:RootState)=>state.auth)
     const router = useRouter()
-    useEffect(()=>{
-         if(!authState.token){
-            return router.push("/")
-         }
-         if(authState.role !== "admin"){
-            return router.push("/")
-         }
-    }, [])
+    // useEffect(()=>{
+    //      if(!authState.token){
+    //         return router.push("/")
+    //      }
+    //      if(authState.role !== "admin"){
+    //         return router.push("/")
+    //      }
+    // }, [])
     return (
         <div className='h-screen overflow-scroll flex items-start justify-start bg-white dark:bg-[#333333]'>
             <Head><title>{title}</title></Head>

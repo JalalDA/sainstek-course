@@ -1,4 +1,5 @@
 import CardKelas from '@/components/atoms/CardKelas'
+import CardPost from '@/components/atoms/CardPost'
 import Fasilitas from '@/components/moleculs/Fasilitas'
 import Footer from '@/components/moleculs/Footer'
 import Navbar from '@/components/moleculs/Navbar'
@@ -42,7 +43,14 @@ const Produk = (props: Props) => {
                     }
                 </div>
                 <div className="grid mt-8 grid-cols-2 md:grid-cols-4 gap-x-4 gap-8">
-                
+                    <CardPost/>
+                    <CardPost/>
+                    <CardPost/>
+                    <CardPost/>
+                    <CardPost/>
+                    <CardPost/>
+                    <CardPost/>
+                    <CardPost/>
                 </div>
             </div>
             <Footer/>
