@@ -13,18 +13,18 @@ type Props = {
 const CardKelas = ({items, onClick}: Props) => {
     return (
         <div onClick={onClick} className='rounded-lg cursor-pointer hover:scale-105 transition-all ease-linear duration-300 w-48 md:w-72 bg-white dark:bg-[#333333] shadow-xl'>
-            <Image src={items.thumbnailURL} alt='Fullstack Development' height={100} width={100} className='w-full rounded-t-lg' />
+            <Image src={items.photo || ""} alt='Fullstack Development' height={100} width={100} className='w-full h-48 w-46 rounded-t-lg' />
             <div className="p-4 w-full">
-                <div className="text-md font-bold">{items.title}</div>
-                <div className={`line-clamp-4 text-md mt-2`}>{items.description}</div>
+                <div className="text-md font-bold">{items.name}</div>
+                <div className={`line-clamp-4 text-md mt-2`}>{items.about}</div>
                 <div className="mt-2 flex items-center justify-between w-full">
                     {/* <div className="flex items-center gap-x-4">
                         <FaStar className="text-yellow-400" />
                         4.8
                     </div> */}
                     <div className="flex flex-col">
-                        <div className="line-through text-sm text-red-500">IDR 1.000.000</div>
-                        <div className="text-md font-bold text-blue-500 ">{formatter(items.price)}</div>
+                        <div className="line-through text-sm text-red-500">{formatter(items?.price_top || 0)}</div>
+                        <div className="text-md font-bold text-blue-500 ">{formatter(items.price_down || 0)}</div>
                     </div>
                 </div>
             </div>

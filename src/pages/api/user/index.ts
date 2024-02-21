@@ -30,7 +30,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     lastName,
                     gender
                 } = req.body
-                console.log(req.body);
                 
                 const user = await User.updateMany({ _id: id }, {
                     $set : {

@@ -10,7 +10,7 @@ const initialState = {
 } as UserState;
 
 export const user = createSlice({
-    name: "token",
+    name: "user",
     initialState,
     reducers: {
         reset: () => initialState,

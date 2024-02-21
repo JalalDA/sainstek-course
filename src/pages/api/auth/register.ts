@@ -11,7 +11,6 @@ const handler = async (req:NextApiRequest, res:NextApiResponse)=>{
         await dbConnet()
         const {username, email, password, phone} = req.body
         const existUsername = await User.findOne({username})
-        console.log({existUsername});
         if(existUsername){
             return res.status(400).json({msg : "Username is already exist"})
         }

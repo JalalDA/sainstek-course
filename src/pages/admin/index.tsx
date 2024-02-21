@@ -7,7 +7,7 @@ const Admin = (props: Props) => {
     
   return (
     <Layout title='Dashboard'>
-
+      <div>Admin page</div>
     </Layout>
   )
 }

@@ -2,6 +2,7 @@ import CardKelas from '@/components/atoms/CardKelas'
 import Fasilitas from '@/components/moleculs/Fasilitas'
 import Footer from '@/components/moleculs/Footer'
 import Navbar from '@/components/moleculs/Navbar'
+import CustomAxios from '@/config/axios'
 import axios from 'axios'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
@@ -10,24 +11,26 @@ import React, { useState } from 'react'
 
 type Props = {}
 
+
+
 const Kelas = ({repo}:InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const tabKelas = [
         {
             name : "Semua",
             route : "/"
         },
-        {
-            name : "Design",
-            route : "/"
-        },
-        {
-            name : "Programming",
-            route : "/"
-        },
-        {
-            name : "Lainnya",
-            route : "/"
-        },
+        // {
+        //     name : "Design",
+        //     route : "/"
+        // },
+        // {
+        //     name : "Programming",
+        //     route : "/"
+        // },
+        // {
+        //     name : "Lainnya",
+        //     route : "/"
+        // },
     ]
     const [isActive, setIsActive] = useState("Semua")
     const router = useRouter()
@@ -48,7 +51,7 @@ const Kelas = ({repo}:InferGetServerSidePropsType<typeof getServerSideProps>) =>
                 <div className="grid mt-8 grid-cols-2 md:grid-cols-4 gap-x-4 gap-8">
                     {
                         repo.map((item, index)=>(
-                            <CardKelas onClick={()=>router.push(`kelas/${item._id}`)} items={item} key={index}/>
+                            <CardKelas onClick={()=>router.push(`kelas/${item.course_id}`)} items={item} key={index}/>
                         ))
                     }
                 </div>
@@ -64,6 +67,6 @@ export default Kelas
 export const getServerSideProps: GetServerSideProps<{
     repo: any[]
   }> = async () => {
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_APP_HOST}/api/kelas`)
-    return { props: { repo : data.data } }
+    const { data } = await CustomAxios.get(`/course`)
+    return { props: { repo : data.courses } }
   }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { BiSupport } from "react-icons/bi";
-import { FaLaptopCode, FaCodeCompare, FaNetworkWired } from "react-icons/fa6";
+import { FaLaptopCode, FaCodeCompare, FaNetworkWired, FaMoneyCheckDollar } from "react-icons/fa6";
 
 type Props = {}
 
@@ -19,8 +19,8 @@ const Fasilitas = (props: Props) => {
             icon: FaCodeCompare
         },
         {
-            name: "Prospek Penyaluran Kerja",
-            icon: FaNetworkWired
+            name: "Harga Kelas Terjangkau",
+            icon: FaMoneyCheckDollar
         },
     ]
     return (

@@ -11,7 +11,6 @@ export default async function handler(
 ) {
     await dbConnet()
     const { method } = req
-    console.log(req.method);
     switch (method) {
         case "POST":
             try {
@@ -21,7 +20,6 @@ export default async function handler(
                 // const { gross_amount } = req.body
                 //@ts-ignore
                 const { id, email, first_name, last_name, gross_amount, productId, kelasId } = req.body
-                console.log({ productId });
                 const generateOrderId = () => {
                     const prefix = "ALPYID";
                     const timestamp = new Date().getTime().toString();

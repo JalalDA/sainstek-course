@@ -5,6 +5,7 @@ import Button from './Button';
 import ButtonLoading from './ButtonLoading';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import Image from 'next/image';
 
 interface ModalFormProps {
     isOpen: boolean;
@@ -77,7 +78,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
                 thumbnailURL : `/uploads/${thumbnailURL}`,
                 ...formData
             })
-            console.log({data});
+            // console.log({data});
             toast.success("Kelas berhasil ditambahkan")
             onClose()
         } catch (error) {
@@ -135,7 +136,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
                                 <input onChange={handleImageChange} name='image' id='image-upload' accept='image/*' type="file" style={{ display: 'none' }} />
                                 <label htmlFor="image-upload">
                                     {
-                                        selectedImage ? <img src={selectedImage} alt="image" />
+                                        selectedImage ? <Image src={selectedImage} alt="image" />
                                             :
                                             <FaRegImage className="text-blue-500 h-20 w-20 cursor-pointer" />
                                     }
