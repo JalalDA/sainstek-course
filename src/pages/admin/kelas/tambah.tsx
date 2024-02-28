@@ -3,12 +3,12 @@ import React from 'react'
 
 type Props = {}
 
-const Halaman = (props: Props) => {
+const TambahKelas = (props: Props) => {
   return (
-    <Layout title='Halaman'>
-      <div>Halaman</div>
+    <Layout title='Tambah Kelas'>
+        <div>Tambah Kelas</div>
     </Layout>
   )
 }
 
-export default Halaman
+export default TambahKelas

@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { FaChevronDown, FaNoteSticky, FaBagShopping, FaScrewdriverWrench } from 'react-icons/fa6'
 import { FaTachometerAlt, FaUserCog, FaRegStickyNote } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { AiFillCodeSandboxCircle } from 'react-icons/ai';
+import Link from 'next/link';
 
 type Props = {}
 
@@ -52,8 +53,8 @@ const Sidebar = (props: Props) => {
         },
     ]
     const router = useRouter()
-    const params = useSearchParams()
-    const i = params.get("i")
+    const pathname = router.pathname
+    console.log({pathname});
     return (
         <div className='hidden md:block p-4 md:p-8 py-12 border-r border-gray-200 h-screen'>
             <div onClick={() => router.replace("/")} className="flex cursor-pointer items-center justify-between w-full mb-8 gap-x-2">
@@ -69,10 +70,10 @@ const Sidebar = (props: Props) => {
                     sidebars.map((item, index) => {
                         const Icon = item.icon
                         return (
-                            <div key={index} className={`${Number(i) === index && "font-bold text-blue-500"} flex items-center justify-start gap-x-8 `}>
+                            <Link href={item.route} key={index} className={` ${pathname === item.route && "font-bold text-blue-500"} flex items-center justify-start gap-x-8 `}>
                                 <Icon className="text-sm" />
-                                <div onClick={() => router.push(`${item.route}?i=${index}`)} key={index} className={`text-md cursor-pointer hover:text-blue-500 hover:font-bold `}>{item.name}</div>
-                            </div>
+                                <div key={index} className={`text-md cursor-pointer hover:text-blue-500 hover:font-bold `}>{item.name}</div>
+                            </Link>
                         )
                     })
                 }

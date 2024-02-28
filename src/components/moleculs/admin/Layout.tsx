@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { FaBell, FaMessage, FaUser } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 type Props = {
     children : React.ReactNode,
@@ -30,16 +30,14 @@ const Layout = ({
         },
     ]
 
-    const authState = useSelector((state:RootState)=>state.auth)
+    const role = useSelector((state:RootState)=>state.auth.role)
     const router = useRouter()
-    // useEffect(()=>{
-    //      if(!authState.token){
-    //         return router.push("/")
-    //      }
-    //      if(authState.role !== "admin"){
-    //         return router.push("/")
-    //      }
-    // }, [])
+
+    useEffect(()=>{
+        if(role !== "Admin"){
+            router.replace("/")
+        }
+    }, [])
     return (
         <div className='h-screen overflow-scroll flex items-start justify-start bg-white dark:bg-[#333333]'>
             <Head><title>{title}</title></Head>

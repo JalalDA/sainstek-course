@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { AiOutlineBars, AiOutlineClose, AiFillCodeSandboxCircle, AiFillBell } from "react-icons/ai";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 import Image from 'next/image'
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
@@ -13,14 +13,15 @@ import { getFailed, getSuccess } from '@/store/features/userSlice';
 import { IoPersonCircleSharp } from "react-icons/io5";
 import Button from '../atoms/Button';
 import CustomAxios from '@/config/axios';
+import Link from 'next/link';
 
 type NavbarProps = {
     bgcolor?: string,
 }
 
 const Navbar = ({ bgcolor = "" }: NavbarProps) => {
-    const token = useSelector((state: RootState) => state.auth.token)
     const [isLoading, setIsLoading] = useState(false)
+    const token = useSelector((state:RootState)=>state.auth.token)
     const navbarItem = [
         {
             name: "Beranda",
@@ -30,27 +31,16 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
             name: "Kelas",
             route: "/kelas"
         },
-        // {
-        //     name: "Artikel",
-        //     route: "/post"
-        // },
-        // {
-        //     name: "Layanan",
-        //     route: "/layanan"
-        // },
-        // {
-        //     name: "Produk",
-        //     route: "/product"
-        // },
+        {
+            name: "Artikel",
+            route: "/articles"
+        },
         {
             name: "Tentang",
             route: "/about"
         },
     ]
     const router = useRouter()
-    const searchParams = useSearchParams()
-    //@ts-ignore
-    const i = searchParams.get("i")
 
     const dispatch = useAppDispatch()
     const cart = useSelector((state: RootState) => state.cart.cart)
@@ -60,7 +50,6 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
         setIsLoading(true)
         try {
             const { data } = await CustomAxios.get(`/user/single`)
-            // console.log({data});
             dispatch(getSuccess(data?.user))
         } catch (error) {
             console.log({ error });
@@ -74,6 +63,8 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
             getUser()
         }
     }, [])
+
+    const path = router.pathname
 
     return (
         <Disclosure as="nav" className={`${bgcolor} z-20 py-2 w-full shadow-xl `}>
@@ -92,15 +83,7 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                             <div className="hidden md:block">
                                 <div className="ml-4 flex items-center space-x-4">
                                     {navbarItem.map((item, index) => (
-                                        <div key={index} className='relative'>
-                                            {token && cart.length !== 0 && index === 2 && <div className="text-white h-6 w-6 rounded-full absolute text-center bottom-4 -right-4 bg-blue-500">{cart.length}</div>}
-                                            <div onClick={() => {
-                                                if (index === 2 && !token || index === 3 && !token) {
-                                                    return toast.error("Please login first")
-                                                }
-                                                router.push(`${item.route}?i=${index}`)
-                                            }} key={index} className={`${Number(i) === index ? "font-extrabold text-center text-md md:text-md text-purple-700 " : "text-black dark:text-black"} hover:text-blue-700 font-bold cursor-pointer`}>{item.name}</div>
-                                        </div>
+                                        <Link key={index} className={`${item.route === path ? "text-blue-500" : "text-black dark:text-white"} font-bold`} href={`${item.route}`}>{item.name}</Link>
                                     ))}
                                 </div>
                             </div>
@@ -108,8 +91,6 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                                 {
                                     token ?
                                         <div className='flex items-center justify-center gap-x-4'>
-                                            {/* <input type='text' placeholder='Search . . . ' className='px-4 py-2 border border-gray-100 rounded-xl outline-yellow-500' />
-                                            <IoMdChatbubbles className='h-8 w-8 text-blue-500' /> */}
                                             <Menu>
                                                 <Menu.Button>
                                                     <AiFillBell className='h-8 w-8 text-blue-500' />
@@ -142,6 +123,7 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                                             <Menu>
                                                 <Menu.Button>
                                                     {
+                                                        user?.photo &&
                                                         user.photo ?
                                                             <Image src={user.photo} alt='Profile' height={32} width={32} className='object-cover h-8 w-8 rounded-full border-blue-200 border-2' />
                                                             :
@@ -217,7 +199,7 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                             <div className="px-2 mt-1 pb-3 space-y-1 sm:px-3">
 
                                 {navbarItem.map((item, index) => (
-                                    <div onClick={() => { router.push(`${item.route}?i=${index}`) }} key={index} className={`${Number(i) === index ? "font-extrabold text-md md:text-3xl text-blue-700" : "text-black"} hover:text-blue-800`}>{item.name}</div>
+                                    <div onClick={() => { router.push(`${item.route}`) }} key={index} className={`hover:text-blue-800`}>{item.name}</div>
                                 ))}
                             </div>
                             {
@@ -255,6 +237,7 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                                         <Menu>
                                             <Menu.Button>
                                                 {
+                                                    user?.photo &&
                                                     user.photo ?
                                                         <Image src={user.photo} alt='Profile' height={32} width={32} className='object-cover h-8 w-8 rounded-full' />
                                                         :

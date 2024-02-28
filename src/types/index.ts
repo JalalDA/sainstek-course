@@ -1,22 +1,22 @@
 export interface Product {
-    category?: string;
-    condition?: string;
-    createdAt?: string;
-    deletedAt?: null | string;
-    description?: string;
-    merchantId?: string;
-    name?: string;
-    photo?: string;
-    stock?: number;
-    supplier?: string;
-    updatedAt?: string;
-    __v?: number;
-    _id?: string;
-    priceSale? : number;
-    count? : number;
-    size? : string;
-    total? : number
-  }
+  category?: string;
+  condition?: string;
+  createdAt?: string;
+  deletedAt?: null | string;
+  description?: string;
+  merchantId?: string;
+  name?: string;
+  photo?: string;
+  stock?: number;
+  supplier?: string;
+  updatedAt?: string;
+  __v?: number;
+  _id?: string;
+  priceSale?: number;
+  count?: number;
+  size?: string;
+  total?: number
+}
 
 
 export interface UserData {
@@ -29,19 +29,19 @@ export interface UserData {
   email?: string;
   membership?: string;
   merchantId?: string;
-  avatar_id?:string;
-  last_name?:string;
-  first_name?:string;
+  avatar_id?: string;
+  last_name?: string;
+  first_name?: string;
   phone_number?: number;
   photo?: string;
   pin?: string;
   status?: string;
   updatedAt?: string;
   username?: string;
-  gender? : string;
+  gender?: string;
   __v?: number;
   user_id?: string;
-  point?:string;
+  point?: string;
 }
 
 export interface Transaction {
@@ -67,13 +67,13 @@ export interface OnlineClass {
   endDate?: Date;
   schedule?: string[]; // Jadwal kelas (misalnya: ["Senin 10:00 AM", "Rabu 2:00 PM"])
   price_top?: number;
-  price_down?:number;
+  price_down?: number;
   total_member?: number;
-  for_who?:string;
-  requirement?:string;
-  will_learn?:string;
-  duration?:number;
-  photo?:string;
+  for_who?: string;
+  requirement?: string;
+  will_learn?: string;
+  duration?: number;
+  photo?: string;
   // enrolledStudents: number;
   // durationInMinutes: number;
   // videoURL: string; // URL video kelas online
@@ -118,10 +118,22 @@ export interface UserCourse {
   will_learn: string;
 }
 
-export interface InvoicesType  {
-    transaction_id: string;
-    status: string | null;
-    name : string | null;
-    price_down : string | null;
-    order_id : string | null;
+export interface InvoicesType {
+  transaction_id: string;
+  status: string | null;
+  name: string | null;
+  price_down: string | null;
+  order_id: string | null;
+}
+
+export interface ArticlesType {
+  articles_id?:string
+  category?:  string
+  content?:string
+  createdAt?:string
+  likes?:number  
+  shared?:number
+  title?: string
+  updatedAt?:string  
+  user_id?:string
 }

@@ -1,11 +1,14 @@
+import Layout from '@/components/moleculs/admin/Layout'
 import React from 'react'
 
 type Props = {}
 
-const index = (props: Props) => {
+const Product = (props: Props) => {
   return (
-    <div>index</div>
+    <Layout title='Product'>
+      <div>Product</div>
+    </Layout>
   )
 }
 
-export default index
+export default Product

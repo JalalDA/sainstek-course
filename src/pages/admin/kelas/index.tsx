@@ -3,6 +3,7 @@ import Button from '@/components/atoms/Button'
 import CardKelas from '@/components/atoms/CardKelas'
 import ModalForm from '@/components/atoms/ModalForm'
 import Layout from '@/components/moleculs/admin/Layout'
+import CustomAxios from '@/config/axios'
 import { tabKelas } from '@/static'
 import axios from 'axios'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
@@ -15,7 +16,7 @@ const Kelas = ({repo}: InferGetServerSidePropsType<typeof getServerSideProps>) =
   const router = useRouter()
   return (
     <Layout title='Kelas'>
-      <Button onClick={()=>setShowModal(true)} title='Tambah Kelas' />
+      <Button onClick={()=>router.push("kelas/tambah")} title='Tambah Kelas' />
       <div className="flex items-center gap-x-4 py-2 px-4 rounded-lg shadow-xl mt-4">
         {
           tabKelas.map((item, index) => (
@@ -40,6 +41,6 @@ export default Kelas
 export const getServerSideProps: GetServerSideProps<{
   repo: any[]
 }> = async () => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_APP_HOST}/api/kelas`)
-  return { props: { repo : data.data } }
+  const { data } = await CustomAxios.get(`/course`)
+  return { props: { repo : data.courses } }
 }

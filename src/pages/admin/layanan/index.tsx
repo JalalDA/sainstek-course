@@ -1,10 +1,13 @@
+import Layout from '@/components/moleculs/admin/Layout'
 import React from 'react'
 
 type Props = {}
 
 const Layanan = (props: Props) => {
   return (
-    <div>Layanan</div>
+    <Layout title='Layanan'>
+      <div>Layanan</div>
+    </Layout>
   )
 }
 

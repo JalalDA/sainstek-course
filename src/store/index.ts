@@ -1,5 +1,4 @@
 // store/index.ts
-
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import rootReducer from './reducers'; // Impor root reducer Anda di sini
