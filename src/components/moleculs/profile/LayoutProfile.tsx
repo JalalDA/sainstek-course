@@ -4,6 +4,7 @@ import CustomAxios from '@/config/axios'
 import { RootState } from '@/store/reducers'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { FaUserCircle, FaCamera, FaCheckSquare } from 'react-icons/fa'
@@ -20,7 +21,7 @@ const LayoutProfile = ({ children }: Props) => {
     const [tabActive, setTabActive] = useState("Profile Saya")
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
     const [previewImage, setPreviewImage] = useState<string | null>(null)
-    const [isLoadingUpload, setIsLoadingUpload ] = useState(false)
+    const [isLoadingUpload, setIsLoadingUpload] = useState(false)
     const sideItems = [
         {
             name: "Profile Saya",
@@ -28,15 +29,15 @@ const LayoutProfile = ({ children }: Props) => {
         },
         {
             name: "Kelas Saya",
-            route: "/profile/kelas_saya"
+            route: "/profile/kelas-saya"
         },
         {
             name: "Invoice Saya",
-            route: "/profile/invoice_saya"
+            route: "/profile/invoice-saya"
         },
         {
             name: "Project Saya",
-            route: "/profile/project_saya"
+            route: "/profile/project-saya"
         }
     ]
 
@@ -52,25 +53,26 @@ const LayoutProfile = ({ children }: Props) => {
         }
     };
 
-    const handleUploadImage = async()=>{
+    const handleUploadImage = async () => {
         setIsLoadingUpload(true)
         try {
-            if(!selectedImage) return;
+            if (!selectedImage) return;
 
             const formData = new FormData();
-    
+
             formData.append("photo", selectedImage)
             const response = await CustomAxios.patch("/user/photo", formData)
-            if(response.status === 200){
+            if (response.status === 200) {
                 setPreviewImage("")
                 window.location.reload();
             }
         } catch (error) {
-            console.log({error});
+            console.log({ error });
         }
         setIsLoadingUpload(false)
     }
 
+    const pathname = router.pathname
     return (
         <div className={`bg-white dark:bg-[#333333] min-h-screen`}>
             <Head><title>Profile</title></Head>
@@ -94,8 +96,8 @@ const LayoutProfile = ({ children }: Props) => {
                                         <FaUserCircle className="h-32 w-32" />
                             }
                             {
-                                isLoadingUpload ? <RiLoader2Fill className="animate-spin text-green-300 h-7 w-7 absolute -right-12 bottom-6 cursor-pointer"/> :
-                                previewImage && <FaCheckSquare onClick={handleUploadImage} className="text-green-300 h-7 w-7 absolute -right-12 bottom-6 cursor-pointer" />
+                                isLoadingUpload ? <RiLoader2Fill className="animate-spin text-green-300 h-7 w-7 absolute -right-12 bottom-6 cursor-pointer" /> :
+                                    previewImage && <FaCheckSquare onClick={handleUploadImage} className="text-green-300 h-7 w-7 absolute -right-12 bottom-6 cursor-pointer" />
                             }
                         </div>
                         <div className="text-md font-bold">{user.username}</div>
@@ -104,10 +106,7 @@ const LayoutProfile = ({ children }: Props) => {
                     <div className="bg-white dark:bg-[#333333] shadow-lg p-8 gap-4 flex items-start justify-start flex-row md:flex-col rounded-lg mt-8">
                         {
                             sideItems.map((item, index) => (
-                                <div onClick={() => {
-                                    setTabActive(item.name)
-                                    router.push(`${item.route}`)
-                                }} key={index} className={`${tabActive === item.name && "text-blue-500"} hover:text-blue-500 text-md font-bold cursor-pointer`}>{item.name}</div>
+                                <Link href={item.route} key={index} className={`${pathname === item.route && "text-blue-500"} hover:text-blue-500 text-md font-bold cursor-pointer`}>{item.name}</Link>
                             ))
                         }
                     </div>

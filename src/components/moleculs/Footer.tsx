@@ -6,6 +6,7 @@ import Image from 'next/image'
 // import youtube from "@/assets/icons/youtube.png";
 // import tik_tok from "@/assets/icons/tik_tok.png";
 import moment from 'moment'
+import { AiFillCodeSandboxCircle } from 'react-icons/ai'
 
 type Props = {}
 
@@ -26,8 +27,8 @@ const Footer = (props: Props) => {
     // ]
 
     const year = moment().year()
-    console.log({year});
-    
+    console.log({ year });
+
     return (
         <div className="w-full z-20">
             <div className='flex flex-col-reverse p-4 md:flex-row items-start justify-evenly md:p-16 bg-gradient-to-r from-blue-500 to-purple-700 w-full z-20'>
@@ -39,6 +40,14 @@ const Footer = (props: Props) => {
                             <Image height={40} width={40} key={index} src={item.icon} alt='icon' />
                         ))}
                     </div> */}
+                    <div className="flex cursor-pointer items-center gap-x-2">
+                        <div className="flex-shrink-0">
+                            <h1 className="text-black dark:text-black font-semibold text-lg">
+                                <AiFillCodeSandboxCircle className={"h-24 w-24 text-white"} />
+                            </h1>
+                        </div>
+                        <div className="text-xl font-bold bg-gradient-to-r from-white via-white to-white text-transparent bg-clip-text">Sciencebox</div>
+                    </div>
                 </div>
                 <div className="logo flex flex-col text-white dark:text-white items-start py-4 md:items-end justify-center p-2 h-42 w-full md:w-1/3">
                     <div className="flex-col items-start">

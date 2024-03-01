@@ -1,21 +1,19 @@
 import ButtonLoading from '@/components/atoms/ButtonLoading'
 import Layout from '@/components/moleculs/admin/Layout'
 import CustomAxios from '@/config/axios'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
-import { IoImageSharp } from 'react-icons/io5'
-import { ToastContainer, toast } from 'react-toastify'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 type Props = {}
 
-const TambahKelas = (props: Props) => {
+const DetailKelas = (props: Props) => {
     const [name, setName] = useState("")
     const [price_top, setPriceTop] = useState(0)
     const [price_down, setPriceDown] = useState(0)
     const [rating, setRating] = useState(5)
     const [total_member, setTotalMember] = useState(0)
-    const [duration, setDuration] = useState(4)
+    const [duration, setDuration] = useState(0)
     const [level, setLevel] = useState("")
     const [category, setCategory] = useState("")
     const [trainer, setTrainer] = useState("")
@@ -24,77 +22,44 @@ const TambahKelas = (props: Props) => {
     const [requirement, setRequirement] = useState("")
     const [will_learn, setWillLearn] = useState("")
     const [isLoading, setIsLoading] = useState(false)
-    const router = useRouter();
-    const [file, setFile] = useState<File | null>(null)
-    const [selectedImg, setSelectedImg] = useState("")
-
-    const formData = new FormData()
-
-    //@ts-ignore
-    formData.append("photo", file)
-    formData.append("name", name)
-    //@ts-ignore
-    formData.append("price_top", price_top)
-    //@ts-ignore
-    formData.append("price_down", price_down)
-    //@ts-ignore
-    formData.append("duration", duration)
-    formData.append("about", about)
-    formData.append("for_who", for_who)
-    formData.append("requirement", requirement)
-    formData.append("will_learn", will_learn)
-
-    const createCourse = async () => {
-        setIsLoading(true)
+    const router = useRouter()
+    const { id } = router.query
+    const [course_id, setCourseId] = useState(id)
+    const getDetailCourse = async () => {
         try {
-            const data = await CustomAxios.post('/course',
-                formData
-                // {
-                //     name,
-                //     price_down,
-                //     price_top,
-                //     duration,
-                //     about,
-                //     for_who,
-                //     requirement,
-                //     will_learn
-                // }
-            )
+            const { data } = await CustomAxios.get(`/course/${course_id}`)
             console.log({ data });
-            if (data.status === 200) {
-                toast.success("Berhasil menambahkan kelas")
-                router.push("/admin/kelas")
-            }
-        } catch (error: any) {
+            setName(data?.course?.name)
+            setAbout(data?.course?.about)
+            setPriceDown(data?.course?.price_down)
+            setPriceTop(data?.course?.price_top)
+            setDuration(data?.course?.duration)
+            setForWho(data?.course?.for_who)
+            setRequirement(data?.course?.requirement)
+            setWillLearn(data?.course?.will_learn)
+
+        } catch (error) {
             console.log({ error });
-            toast.error(error?.response?.data?.msg || "Terjadi kesalahan, silakan coba lagi")
+            toast.error("Terjadi kesalahan saat mengambil detail kelas")
         }
-        setIsLoading(false)
     }
 
+    useEffect(() => {
+        getDetailCourse()
+    }, [])
 
+    const updateCourse = async ()=>{
+        try {
+            
+        } catch (error) {
+            console.log({error});
+            toast.error("Terjadi kesalahan")
+        }
+    }
     return (
-        <Layout title='Tambah Kelas'>
+        <Layout title='Detail Kelas'>
             <div>Tambah Kelas</div>
             <form className='border border-gray-200 p-2 mt-4 rounded-lg w-2/3'>
-                <div className='flex flex-col gap-x-2 mt-2 mb-4'>
-                    <label htmlFor="photo">
-                        {
-                            selectedImg ?
-                                <Image alt='' src={selectedImg} height={200} width={200} className='h-64 w-96' /> :
-                                <IoImageSharp className={"h-64 w-96 cursor-pointer"} />
-                        }
-                    </label>
-                    <input type='file'
-                        onChange={e => {
-                            const file = e.target.files?.[0];
-                            if (file) {
-                                setFile(file)
-                                const imageUrl = URL.createObjectURL(file);
-                                setSelectedImg(imageUrl);
-                            }
-                        }} className='p-2 rounded-lg border-gray border outline-none h-40 hidden ' id='photo' placeholder='' />
-                </div>
                 <div className='flex flex-col gap-x-2'>
                     <label htmlFor="name">Nama Kelas</label>
                     <input onChange={e => {
@@ -129,10 +94,10 @@ const TambahKelas = (props: Props) => {
                     <label htmlFor="name">Apa saja yang akan dipelajari di kelas ini?</label>
                     <textarea value={will_learn} onChange={e => setWillLearn(e.target.value)} className='p-2 rounded-lg border-gray border outline-none h-40' id='name' placeholder='Apa saja yang akan dipelajari? . . .' />
                 </div>
-                <ButtonLoading buttonText='Tambah Kelas' isLoading={isLoading} onClick={createCourse} />
+                <ButtonLoading buttonText='Tambah Kelas' isLoading={isLoading} onClick={updateCourse} />
             </form>
         </Layout>
     )
 }
 
-export default TambahKelas
+export default DetailKelas

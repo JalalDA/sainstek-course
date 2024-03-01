@@ -7,7 +7,7 @@ import CustomAxios from '@/config/axios'
 import { tabKelas } from '@/static'
 import axios from 'axios'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 const Kelas = ({repo}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -28,7 +28,12 @@ const Kelas = ({repo}: InferGetServerSidePropsType<typeof getServerSideProps>) =
       <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-8">
         {
           repo.map((item, index)=>(
-            <CardKelas onClick={()=>router.push(`kelas/${item._id}?title=${item.title}&i=3`)} items={item} key={index}/>
+            <CardKelas onClick={()=>router.push({
+              pathname : `kelas/${item.name.split(" ").join("-").toLocaleLowerCase()}`,
+              query : {
+                id : item.course_id
+              }
+            })} items={item} key={index}/>
           ))
         }
       </div>

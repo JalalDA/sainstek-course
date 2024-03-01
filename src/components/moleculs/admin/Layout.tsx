@@ -5,6 +5,7 @@ import { FaBell, FaMessage, FaUser } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
 import { useRouter } from 'next/router';
+import { ToastContainer } from 'react-toastify';
 
 type Props = {
     children : React.ReactNode,
@@ -41,6 +42,7 @@ const Layout = ({
     return (
         <div className='h-screen overflow-scroll flex items-start justify-start bg-white dark:bg-[#333333]'>
             <Head><title>{title}</title></Head>
+            <ToastContainer autoClose={500}/>
             <Sidebar />
             <div className="w-full">
                 {/* navbaradmin */}
