@@ -7,6 +7,7 @@ import Image from 'next/image'
 // import tik_tok from "@/assets/icons/tik_tok.png";
 import moment from 'moment'
 import { AiFillCodeSandboxCircle } from 'react-icons/ai'
+import Link from 'next/link'
 
 type Props = {}
 
@@ -27,13 +28,11 @@ const Footer = (props: Props) => {
     // ]
 
     const year = moment().year()
-    console.log({ year });
-
     return (
         <div className="w-full z-20">
             <div className='flex flex-col-reverse p-4 md:flex-row items-start justify-evenly md:p-16 bg-gradient-to-r from-blue-500 to-purple-700 w-full z-20'>
                 {/* social media */}
-                <div className="logo flex mt-4 items-center justify-center flex-col gap-y-8 z-20 bg-blue-5000 h-42 w-full md:w-1/3">
+                <div className="logo flex mt-4 items-start justify-start flex-col gap-y-8 z-20 bg-blue-5000 h-42 w-full md:w-1/3">
                     {/* <Image height={160} width={160} src={logo} alt='logo' /> */}
                     {/* <div className="flex items-center justify-center gap-x-4">
                         {icons.map((item, index) => (
@@ -60,9 +59,13 @@ const Footer = (props: Props) => {
                     </div>
                 </div>
                 <div className="logo flex flex-col text-white dark:text-white items-start md:items-center justify-center p-2 h-42 w-full md:w-1/3">
-                    <div className="flex-col items-start">
-                        {/* <div className=" text-lg font-bold">Layanan</div>
-                        <div className=" text-md">Resto</div>
+                    <div className="flex-col flex items-start">
+                        <Link href={"/about"} className=" text-md font-bold ">Tentang Kami</Link>
+                        <Link href={"/karir"} className=" text-md font-bold ">Karir</Link>
+                        <Link href={"/syarat-dan-ketentuan"} className=" text-md font-bold ">Syarat dan ketentuan</Link>
+                        <Link href={"/kebijakan-privasi"} className=" text-md font-bold ">Kebijakan privasi</Link>
+                        {/* <div className=" text-lg font-bold">Karir</div> */}
+                        {/* <div className=" text-md">Resto</div>
                         <div className=" text-md">Kolam Sprint</div>
                         <div className=" text-md">Saung</div>
                         <div className=" text-md">Free Karaoke</div>

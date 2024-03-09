@@ -35,10 +35,15 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
             name: "Artikel",
             route: "/articles"
         },
-        {
-            name: "Tentang",
-            route: "/about"
-        },
+        // {
+        //     name: "Tentang",
+        //     route: "/about"
+        // },
+        // {
+        //     name: "Karir",
+        //     route: "/karir"
+        // },
+        
     ]
     const router = useRouter()
 
@@ -67,10 +72,10 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
     const path = router.pathname
 
     return (
-        <Disclosure as="nav" className={`${bgcolor} z-20 py-2 w-full shadow-xl `}>
+        <Disclosure as="nav" className={`${bgcolor} z-20 py-2 w-full shadow-xl bg-white dark:bg-white `}>
             {({ open }) => (
                 <>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
                         <div className="flex items-center justify-between h-16">
                             <div onClick={() => router.replace("/")} className="flex cursor-pointer items-center gap-x-2">
                                 <div className="flex-shrink-0">
@@ -83,7 +88,7 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                             <div className="hidden md:block">
                                 <div className="ml-4 flex items-center space-x-4">
                                     {navbarItem.map((item, index) => (
-                                        <Link key={index} className={`${item.route === path ? "text-blue-500" : "text-black dark:text-white"} font-bold`} href={`${item.route}`}>{item.name}</Link>
+                                        <Link key={index} className={`${item.route === path ? "text-blue-500" : "text-black dark:text-black"} font-bold`} href={`${item.route}`}>{item.name}</Link>
                                     ))}
                                 </div>
                             </div>
@@ -174,7 +179,7 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                                                 </Transition>
                                             </Menu>
                                         </div> :
-                                        <div className='md:flex hidden items-center justify-center gap-x-4 text-white dark:text-white'>
+                                        <div className='md:flex hidden items-center justify-center gap-x-4 text-white dark:text-black'>
                                             <Button onClick={() => { router.push("/login") }} title='Login / Register' />
                                         </div>
                                 }
@@ -199,7 +204,7 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                             <div className="px-2 mt-1 pb-3 space-y-1 sm:px-3">
 
                                 {navbarItem.map((item, index) => (
-                                    <div onClick={() => { router.push(`${item.route}`) }} key={index} className={`hover:text-blue-800`}>{item.name}</div>
+                                    <div onClick={() => { router.push(`${item.route}`) }} key={index} className={`hover:text-blue-800 dark:text-black font-bold`}>{item.name}</div>
                                 ))}
                             </div>
                             {
@@ -288,7 +293,7 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
                                             </Transition>
                                         </Menu>
                                     </div> :
-                                    <div className='flex items-center gap-y-4 gap-x-4 w-full text-white dark:text-white'>
+                                    <div className='flex items-center gap-y-4 gap-x-4 w-full text-white dark:text-black'>
                                         <Button onClick={() => { router.push("/login") }} title='Login / Register' />
                                     </div>
                             }

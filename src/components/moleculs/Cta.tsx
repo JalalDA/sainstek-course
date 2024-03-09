@@ -9,7 +9,7 @@ const Cta = (props: Props) => {
     const router = useRouter()
     return (
         <div className='flex items-center justify-between md:px-32 md:py-16 p-4 '>
-            <div className="flex flex-col-reverse md:flex-row items-center justify-center bg-white dark:bg-[#333333] shadow-xl rounded-lg px-4">
+            <div className="flex flex-col-reverse md:flex-row items-center justify-center bg-white dark:bg-white dark:text-black shadow-xl rounded-lg px-4">
                 <Image src={"/images/Illustration.png"} alt='ilustration' height={200} width={500} />
                 <div className="flex items-start flex-col justify-start  ">
                     <div className="text-xl font-bold">Tunggu apalagi</div>

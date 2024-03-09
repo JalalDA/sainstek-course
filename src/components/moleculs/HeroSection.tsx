@@ -8,7 +8,7 @@ type Props = {}
 const HeroSection = (props: Props) => {
     const router = useRouter();
     return (
-        <div className='flex items-center justify-center md:py-32 py-16 px-4 gap-8 flex-col md:flex-row'>
+        <div className='flex items-center justify-center md:py-32 py-16 px-4 gap-8 flex-col md:flex-row dark:bg-white dark:text-black'>
             <div className="w-full md:w-1/2 flex items-center justify-center flex-col gap-y-4">
                 <div className="text-2xl md:text-4xl text-center font-bold">
                     Ubah hidupmu

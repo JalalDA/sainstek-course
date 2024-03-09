@@ -29,8 +29,8 @@ const Articles = (props: Props) => {
 
     const router = useRouter()
     return (
-        <div className='bg-white dark:bg-[#333333]'>
-            <Head><title>Tulis Artikel</title></Head>
+        <div className='bg-white dark:bg-white dark:text-black'>
+            <Head><title>Artikel</title></Head>
             <Navbar />
             <div className="p-4 md:py-16 md:px-20">
                 <div className="text-md md:text-2xl font-bold mb-16 text-center">Nikmati berbagai macam kelas <br /> pilihan yang sesuai dengan minat dan bakatmu bersama trainer yang supportive dan menyenangkan</div>
@@ -39,7 +39,12 @@ const Articles = (props: Props) => {
                     {
                         articles.map((item, index) => (
                             <div key={index} className="border-gray border p-4 w-72 rounded-lg ">
-                                <div onClick={()=>router.push(`/articles/${item.articles_id}`)} className="text-xl font-bold mb-2 cursor-pointer">{item.title}</div>
+                                <div onClick={()=>router.push({
+                                    pathname : item.title && `articles/${item?.title.split(" ").join("-").toLocaleLowerCase()}`,
+                                    query : {
+                                        id : item?.articles_id
+                                    }
+                                })} className="text-xl font-bold mb-2 cursor-pointer">{item.title}</div>
                                 <div dangerouslySetInnerHTML={{ __html: item.content || "" }} className="text-md h-[210px] w-full overflow-hidden"></div>
                                 <div className="mt-4">
                                     <div className="flex items-center justify-end gap-x-4 pt-2 border-t-2 border-gray-200">

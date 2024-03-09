@@ -60,7 +60,6 @@ const TambahKelas = (props: Props) => {
                 //     will_learn
                 // }
             )
-            console.log({ data });
             if (data.status === 200) {
                 toast.success("Berhasil menambahkan kelas")
                 router.push("/admin/kelas")

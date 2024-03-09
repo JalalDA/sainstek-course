@@ -78,7 +78,6 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
                 thumbnailURL : `/uploads/${thumbnailURL}`,
                 ...formData
             })
-            // console.log({data});
             toast.success("Kelas berhasil ditambahkan")
             onClose()
         } catch (error) {

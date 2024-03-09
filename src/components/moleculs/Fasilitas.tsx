@@ -24,12 +24,12 @@ const Fasilitas = (props: Props) => {
         },
     ]
     return (
-        <div className='grid-cols-2 md:grid-cols-4 grid p-4 items-center justify-center gap-8'>
+        <div className='grid-cols-2 md:grid-cols-4 grid p-4 dark:bg-white dark:text-black items-center justify-center gap-8'>
             {
                 fass.map((item, index) => {
                     const Icon = item.icon
                     return (
-                        <div key={index} className="bg-white dark:bg-[#333333] h-36 shadow-xl hover:scale-110 transition-all duration-200 ease-linear p-4 gap-4 rounded-lg flex flex-col items-center justify-center">
+                        <div key={index} className="bg-white dark:bg-white h-36 shadow-xl hover:scale-110 transition-all duration-200 ease-linear p-4 gap-4 rounded-lg flex flex-col items-center justify-center">
                             <Icon className="text-3xl" />
                             <div className="text-md">{item.name}</div>
                         </div>

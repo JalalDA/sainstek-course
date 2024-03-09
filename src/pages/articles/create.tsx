@@ -2,15 +2,27 @@ import ButtonLoading from '@/components/atoms/ButtonLoading';
 import Footer from '@/components/moleculs/Footer';
 import Navbar from '@/components/moleculs/Navbar'
 import CustomAxios from '@/config/axios';
+import { RootState } from '@/store/reducers';
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import React, { useMemo, useState } from 'react'
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react'
 import 'react-quill/dist/quill.snow.css';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 type Props = {}
 
 const CreateArticles = (props: Props) => {
+
+    const role = useSelector((state:RootState)=>state.auth.role)
+    const router = useRouter()
+
+    useEffect(()=>{
+        if(role !== "Admin"){
+            router.replace("/")
+        }
+    }, [])
 
     const [value, setValue] = useState("")
     const [title, setTitle] = useState("")
@@ -31,7 +43,6 @@ const CreateArticles = (props: Props) => {
                 content : value,
                 title
             })
-            console.log({data});
             setValue("")
             setTitle("")
             toast.success("Sukses kirim artikel")
@@ -42,14 +53,14 @@ const CreateArticles = (props: Props) => {
         setIsLoading(false)
     }
     return (
-        <div className='bg-white dark:bg-[#333333]'>
+        <div className='bg-white dark:bg-white dark:text-black'>
             <Head><title>Tulis Artikel</title></Head>
             <Navbar />
             <div className='m-10'>
                 <div className="text-md font-bold">Tulis Artikel</div>
                 <div className='flex flex-col gap-y-2 mt-4'>
                     {/* <label htmlFor="title">Username</label> */}
-                    <input placeholder='Judul Artikel' onChange={e => setTitle(e.target.value)}  id='title' className='border border-gray-300 dark:bg-[#333] dark:outline-none rounded-md p-2 w-full md:w-2/3' type="text" value={title} />
+                    <input placeholder='Judul Artikel' onChange={e => setTitle(e.target.value)}  id='title' className='border border-gray-300 dark:bg-white dark:outline-none rounded-md p-2 w-full md:w-2/3' type="text" value={title} />
                 </div>
                 <ReactQuill
                     className='w-full md:w-2/3 h-[620px] mb-20 mt-4'

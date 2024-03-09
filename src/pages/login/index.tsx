@@ -46,7 +46,7 @@ const Login = (props: Props) => {
     }
   }, [token])
   return (
-    <div className='bg-white dark:bg-[#333333] h-screen flex items-start justify-between p-0'>
+    <div className='bg-white dark:bg-white dark:text-black h-screen flex items-start justify-between p-0'>
       <ToastContainer autoClose={1000} />
       <Head><title>Login</title></Head>
       <div className="w-1/2 hidden md:block h-screen bg-gradient-to-r from-blue-500 to-purple-700"></div>

@@ -12,7 +12,7 @@ import { RiLoader2Fill } from 'react-icons/ri'
 
 type Props = {}
 
-const Kelassaya = (props:Props)=> {
+const Kelassaya = (props: Props) => {
   const [userClass, setUserClass] = useState<UserCourse[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -34,27 +34,16 @@ const Kelassaya = (props:Props)=> {
   return (
     <LayoutProfile>
       <div className="font-bold mb-4">Kelas Saya</div>
-      {
-        isLoading ? <RiLoader2Fill /> :
-          userClass && userClass?.map((item, index) => (
-            <CardUserCourse key={index} item={item}/>
-          ))
-      }
+      <div className="p-4 flex flex-col gap-6">
+        {
+          isLoading ? <RiLoader2Fill /> :
+            userClass && userClass?.map((item, index) => (
+              <CardUserCourse key={index} item={item} />
+            ))
+        }
+      </div>
     </LayoutProfile>
   )
 }
 
 export default Kelassaya
-
-// export const getServerSideProps: GetServerSideProps<{
-//   repo: any[]
-// }> = async () => {
-//   const token = store.getState().user.user.user_id
-//   console.log({token})
-//   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_APP_HOST}/v1/course`, {
-//     headers : {
-//       Authorization : `Bearer ${token}`
-//     }
-//   })
-//   return { props: { repo : data } }
-// }

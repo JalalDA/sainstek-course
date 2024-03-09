@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { FaChevronDown, FaNoteSticky, FaBagShopping, FaScrewdriverWrench } from 'react-icons/fa6'
-import { FaTachometerAlt, FaUserCog, FaRegStickyNote } from "react-icons/fa";
+import { FaChevronDown, FaNoteSticky, FaBagShopping, FaScrewdriverWrench, FaBook, FaBroom, FaBookAtlas } from 'react-icons/fa6'
+import { FaTachometerAlt, FaUserCog, FaRegStickyNote, FaBookReader } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { AiFillCodeSandboxCircle } from 'react-icons/ai';
 import Link from 'next/link';
+import { IoIosApps } from 'react-icons/io';
 
 type Props = {}
 
@@ -29,7 +30,12 @@ const Sidebar = (props: Props) => {
         {
             name: "Kelas",
             route: '/admin/kelas',
-            icon: FaUserCog
+            icon: FaBookReader
+        },
+        {
+            name: "Materi",
+            route: '/admin/lesson',
+            icon: FaBook
         },
         {
             name: "Artikel",
@@ -40,6 +46,11 @@ const Sidebar = (props: Props) => {
             name: "Produk",
             route: '/admin/product',
             icon: FaBagShopping
+        },
+        {
+            name : "Lamaran",
+            route : "/admin/apply",
+            icon : IoIosApps
         },
         {
             name: "Layanan",
@@ -54,7 +65,6 @@ const Sidebar = (props: Props) => {
     ]
     const router = useRouter()
     const pathname = router.pathname
-    console.log({pathname});
     return (
         <div className='hidden md:block p-4 md:p-8 py-12 border-r border-gray-200 h-screen'>
             <div onClick={() => router.replace("/")} className="flex cursor-pointer items-center justify-between w-full mb-8 gap-x-2">
@@ -63,7 +73,7 @@ const Sidebar = (props: Props) => {
                         <AiFillCodeSandboxCircle className={"h-8 w-8 text-blue-500"} />
                     </h1>
                 </div>
-                <div className="text-md font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">Sainstek Pringsewu</div>
+                <div className="text-md font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">Sciencebox</div>
             </div>
             <div className="flex flex-col gap-y-8">
                 {
@@ -78,10 +88,10 @@ const Sidebar = (props: Props) => {
                     })
                 }
             </div>
-            <div className="flex absolute bottom-20 items-center gap-x-10 cursor-pointer hover:text-blue-500 hover:font-bold justify-between">
+            {/* <div className="flex absolute bottom-20 items-center gap-x-10 cursor-pointer hover:text-blue-500 hover:font-bold justify-between">
                 <div className="text-md">Logout</div>
                 <FiLogOut />
-            </div>
+            </div> */}
         </div>
     )
 }

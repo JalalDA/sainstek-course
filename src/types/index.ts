@@ -137,3 +137,29 @@ export interface ArticlesType {
   updatedAt?:string  
   user_id?:string
 }
+
+export interface Lesson {
+  comment: null;
+  content: string;
+  course_id: string;
+  createdAt: string;
+  daysto: null;
+  deleted_at: null;
+  lesson_id: string;
+  likes: null;
+  share: null;
+  title: string;
+  updatedAt: string;
+}
+
+export interface Application {
+  apply_id: string;
+  username: string;
+  email: string;
+  phone: string;
+  resume: string;
+  address: string;
+  deleted_at: string | null;
+  createdAt: string;
+  updatedAt: string;
+}

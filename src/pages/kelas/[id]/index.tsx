@@ -4,22 +4,18 @@ import Footer from '@/components/moleculs/Footer'
 import Navbar from '@/components/moleculs/Navbar'
 import CustomAxios from '@/config/axios'
 import { formatter } from '@/config/formatter'
-import { RootState } from '@/store/reducers'
 import { OnlineClass } from '@/types'
-import axios from 'axios'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
 
 
 const SingleKelas = ({repo}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [isLoadingPay, setIsLoadingPay] = useState(false)
     const router = useRouter()
-    const user = useSelector((state:RootState)=>state.user.user)
 
     const checkout = async ()=>{
         setIsLoadingPay(true)
@@ -31,7 +27,7 @@ const SingleKelas = ({repo}: InferGetServerSidePropsType<typeof getServerSidePro
             if(data){
                 window.open(data?.url, "_blank")
             }
-            router.push('/profile/invoice_saya')
+            router.push('/profile/invoice-saya')
             toast.success("Success create transaction")
         } catch (error) {
             console.log({error});
@@ -40,7 +36,7 @@ const SingleKelas = ({repo}: InferGetServerSidePropsType<typeof getServerSidePro
         setIsLoadingPay(false)
     }
     return (
-        <div className='bg-white dark:bg-[#333333]'>
+        <div className='bg-white dark:bg-white dark:text-black'>
             <Head><title>Kelas</title></Head>
             <Navbar />
             <ToastContainer autoClose={1000} />
@@ -54,7 +50,7 @@ const SingleKelas = ({repo}: InferGetServerSidePropsType<typeof getServerSidePro
                         <Image className='h-96' height={800} width={600} alt={`${repo.name}`} src={repo?.photo || ""}/>
                     </div>
                     <div className="w-full md:w-2/3">
-                        <div className="bg-white dark:bg-[#333] shadow-xl p-4 rounded-lg">
+                        <div className="bg-white dark:bg-white shadow-xl p-4 rounded-lg">
                             <div className="text-md mb-4">{repo.about}</div>
                             <div className="text-md font-bold">Untuk siapa kelas ini : </div>
                             <div className='text-md mb-4' dangerouslySetInnerHTML={{__html : repo.for_who || ""}}></div>
@@ -84,7 +80,6 @@ export const getServerSideProps: GetServerSideProps<{
     const { params } = context
     //@ts-ignore
     const id = params?.id
-    console.log({ idparams: id });
     const { data } = await CustomAxios.get(`/course/${id}`)
 
     const repo = data.course
