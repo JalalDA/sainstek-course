@@ -1,6 +1,5 @@
 import Layout from '@/components/moleculs/admin/Layout'
 import Category from '@/components/moleculs/category/Category'
-import ComponentFormEditor from '@/components/moleculs/quill/QuillEditor'
 import React from 'react'
 
 type Props = {}

@@ -5,39 +5,13 @@ import Modal from '@/components/moleculs/modals/Modal'
 import CustomAxios from '@/config/axios'
 import { tabKelas } from '@/static'
 import { Lesson } from '@/types'
+import dynamic from 'next/dynamic'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { RiLoader2Line } from 'react-icons/ri'
-import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify'
-
-const Inline = Quill.import("blots/inline");
-
-const createElementWithClassName = () => {
-    class SpanBlock extends Inline {
-        static create() {
-            let node = super.create();
-            node.setAttribute("class", "spanblock");
-            node.setAttribute("id", "myId")
-
-            return node;
-        }
-    }
-    SpanBlock.blotName = "spanblock";
-    SpanBlock.tagName = "div";
-    Quill.register(SpanBlock);
-
-    const div = document.createElement("div");
-    var quill = new Quill(div);
-
-    // quill.setContents("");
-
-    const result = quill.root.innerHTML;
-    console.log(result);
-    return result;
-};
 
 
 type Props = {}
@@ -82,6 +56,11 @@ const Lesson = (props: Props) => {
         }
         setIsLoadingLesson(false)
     }
+
+    const ReactQuill = useMemo(
+        () => dynamic(() => import("react-quill"), { ssr: false }),
+        [],
+    );
 
     useEffect(()=>{
         getLessonByCourseId();
@@ -129,39 +108,6 @@ const Lesson = (props: Props) => {
                                 'link',
                             ]}
                         />
-                        {/* <ReactQuill
-                            ref={reactQuillRef}
-                            modules={{
-                                toolbar: [
-                                    [{ font: [] }, { size: ["small", false, "large", "huge"] }], // custom dropdown
-
-                                    ["bold", "italic", "underline", "strike"],
-
-                                    [{ color: [] }, { background: [] }],
-
-                                    [{ script: "sub" }, { script: "super" }],
-
-                                    [{ header: 1 }, { header: 2 }, "blockquote", "code-block"],
-
-                                    [
-                                        { list: "ordered" },
-                                        { list: "bullet" },
-                                        { indent: "-1" },
-                                        { indent: "+1" },
-                                    ],
-
-                                    [{ direction: "rtl" }, { align: [] }],
-
-                                    ["link", "image", "video", "formula"],
-
-                                    ["clean"],
-                                ],
-                            }}
-                            value={content}
-                            onChange={(content) => {
-                                setContent(content);
-                            }}
-                        /> */}
                     </div>
                     <div className="flex items-center gap-x-4">
                         <ButtonLoading isLoading={isLoading} buttonText='Tambah Materi' onClick={createLesson} />
