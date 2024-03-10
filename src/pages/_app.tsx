@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`}>
         <main className={`${poppins.className}`}>
           <Head>
+          <meta name="google-adsense-account" content="ca-pub-7429657524364314"/>
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7429657524364314"
               crossOrigin="anonymous"></script>
           </Head>
