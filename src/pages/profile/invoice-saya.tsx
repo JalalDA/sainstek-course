@@ -27,8 +27,8 @@ const InvoiceSaya = (props: Props) => {
   return (
     <LayoutProfile>
       <div className="font-bold mb-4">Invoice Saya</div>
-      <table className="min-w-full dark:bg-[#333] divide-y divide-gray-200 overflow-scroll">
-        <thead className="bg-gray-50 dark:bg-[#333]">
+      <table className="min-w-full dark:bg-gray-200 dark:text-black divide-y divide-gray-200 overflow-scroll">
+        <thead className="bg-gray-50 dark:bg-gray-200 dark:text-black">
           <tr>
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Nama
@@ -42,6 +42,9 @@ const InvoiceSaya = (props: Props) => {
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               status
             </th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -49,10 +52,10 @@ const InvoiceSaya = (props: Props) => {
             
             invoices.map((invoice, index) => (
               <tr key={index}>
-                <td className="px-6 py-4 whitespace-nowrap dark:bg-[#333]">{invoice.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap dark:bg-[#333]">{invoice.order_id}</td>
-                <td className="px-6 py-4 whitespace-nowrap dark:bg-[#333]">{invoice.price_down}</td>
-                <td className="px-6 py-4 whitespace-nowrap dark:bg-[#333]">{invoice.status}</td>
+                <td className="px-6 py-4 whitespace-nowrap dark:bg-white dark:text-black">{invoice.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap dark:bg-white dark:text-black">{invoice.order_id}</td>
+                <td className="px-6 py-4 whitespace-nowrap dark:bg-white dark:text-black">{invoice.price_down}</td>
+                <td className="px-6 py-4 whitespace-nowrap dark:bg-white dark:text-black">{invoice.status}</td>
               </tr>
             ))
           }

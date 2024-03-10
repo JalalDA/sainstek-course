@@ -74,13 +74,13 @@ const LayoutProfile = ({ children }: Props) => {
 
     const pathname = router.pathname
     return (
-        <div className={`bg-white dark:bg-[#333333] min-h-screen`}>
+        <div className={`bg-white dark:bg-white dark:text-black min-h-screen`}>
             <Head><title>Profile</title></Head>
             <Navbar />
             <div className="mt-16 p-4 md:px-12 md:flex items-start justify-start gap-x-4 ">
                 {/* sidebar */}
                 <div className="w-full md:w-1/3">
-                    <div className="bg-white dark:bg-[#333333] shadow-lg p-8 flex items-center justify-center flex-col rounded-lg">
+                    <div className="bg-white dark:bg-white dark:text-black shadow-lg p-8 flex items-center justify-center flex-col rounded-lg">
 
                         <div className="relative">
                             <input onChange={handleSelectedImage} className='hidden' id='upload' type="file" accept='.jpg,.jpeg,.png' />
@@ -103,7 +103,7 @@ const LayoutProfile = ({ children }: Props) => {
                         <div className="text-md font-bold">{user.username}</div>
                         <div className="text-md text-blue-500">{user.email}</div>
                     </div>
-                    <div className="bg-white dark:bg-[#333333] shadow-lg p-8 gap-4 flex items-start justify-start flex-row md:flex-col rounded-lg mt-8">
+                    <div className="bg-white dark:bg-white dark:text-black shadow-lg p-8 gap-4 flex items-start justify-start flex-row md:flex-col rounded-lg mt-8">
                         {
                             sideItems.map((item, index) => (
                                 <Link href={item.route} key={index} className={`${pathname === item.route && "text-blue-500"} hover:text-blue-500 text-md font-bold cursor-pointer`}>{item.name}</Link>

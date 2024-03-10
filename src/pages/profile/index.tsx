@@ -78,17 +78,17 @@ const Profile = (props: Props) => {
             <form >
                 <div className='flex flex-col gap-y-2 mb-2'>
                     <label htmlFor="username">Username</label>
-                    <input onChange={e => setUsername(e.target.value)} ref={inputRef} disabled={editable} id='username' className='border border-gray-300 dark:bg-[#333] dark:outline-none rounded-md p-2' type="text" value={username} />
+                    <input onChange={e => setUsername(e.target.value)} ref={inputRef} disabled={editable} id='username' className='border border-gray-300 dark:bg-white dark:text-black dark:outline-none rounded-md p-2' type="text" value={username} />
                 </div>
                 <div className='flex flex-col gap-y-2 mb-2'>
                     <label htmlFor="firstname">Nama Depan</label>
-                    <input onChange={e => setFirstName(e.target.value)} disabled={editable} id='firstname' className='border border-gray-300 rounded-md p-2 dark:bg-[#333] dark:outline-none ' type="text" value={first_name} />
+                    <input onChange={e => setFirstName(e.target.value)} disabled={editable} id='firstname' className='border border-gray-300 rounded-md p-2 dark:bg-white dark:text-black dark:outline-none ' type="text" value={first_name} />
                 </div>
                 <div className='flex flex-col gap-y-2 mb-2'>
                     <label htmlFor="lastname">Nama Belakang</label>
-                    <input onChange={e => setLastName(e.target.value)} disabled={editable} id='lastname' className='border border-gray-300 rounded-md p-2 dark:bg-[#333] dark:outline-none ' type="text" value={last_name} />
+                    <input onChange={e => setLastName(e.target.value)} disabled={editable} id='lastname' className='border border-gray-300 rounded-md p-2 dark:bg-white dark:text-black dark:outline-none ' type="text" value={last_name} />
                 </div>
-                <div className='flex flex-col gap-y-2 mb-2 dark:bg-[#333] dark:outline-none '>
+                <div className='flex flex-col gap-y-2 mb-2 dark:bg-white dark:text-black dark:outline-none '>
                     <label htmlFor="gender">Jenis Kelamin</label>
                     <Select isDisabled={editable} defaultValue={gender} onChange={e => setGender({ value: e?.value || "", label: e?.label || "" })} options={genderOptions} />
                 </div>
@@ -96,14 +96,14 @@ const Profile = (props: Props) => {
                     <label htmlFor="phone">Nomor Handphone</label>
                     <div className='border border-gray-300 rounded-md p-2 flex items-center justify-start gap-x-4'>
                         <div className="">+62</div>
-                        <input onChange={e => setPhoneNumber(Number(e.target.value))} disabled={editable} id='phone' className='bg-white outline-none dark:bg-[#333] dark:outline-none ' type="number" value={phone_number} />
+                        <input onChange={e => setPhoneNumber(Number(e.target.value))} disabled={editable} id='phone' className='bg-white outline-none dark:bg-white dark:text-black dark:outline-none ' type="number" value={phone_number} />
                     </div>
                 </div>
                 <div className='flex flex-col gap-y-2 mb-2'>
                     <label htmlFor="address">Alamat</label>
                     <textarea onChange={e => {
                         setAddress(e.target.value)
-                    }} disabled={editable} id='address' className='border border-gray-300 rounded-md p-2 h-32 dark:bg-[#333] dark:outline-none ' value={address} />
+                    }} disabled={editable} id='address' className='border border-gray-300 rounded-md p-2 h-32 dark:bg-white dark:text-black dark:outline-none ' value={address} />
                 </div>
             </form>
             <div className='mt-4'></div>
