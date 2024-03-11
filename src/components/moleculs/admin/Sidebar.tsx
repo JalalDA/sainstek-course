@@ -58,6 +58,11 @@ const Sidebar = (props: Props) => {
             icon: FaScrewdriverWrench
         },
         {
+            name: "Kategori",
+            route: '/admin/kategori',
+            icon: FaScrewdriverWrench
+        },
+        {
             name: "Halaman",
             route: '/admin/halaman',
             icon: FaRegStickyNote

@@ -40,15 +40,15 @@ const Layout = ({
         }
     }, [])
     return (
-        <div className='h-screen overflow-scroll flex items-start justify-start bg-white dark:bg-[#333333]'>
+        <div className='h-screen overflow-scroll flex items-start justify-start bg-white dark:bg-white dark:text-black'>
             <Head><title>{title}</title></Head>
             <ToastContainer autoClose={500}/>
             <Sidebar />
             <div className="w-full">
                 {/* navbaradmin */}
                 <div className="p-4 w-full border-b flex items-center justify-center gap-x-8">
-                    <div className="dark:bg-gray-500 w-3/4 border border-gray-200 rounded-lg p-2">
-                        <input className='dark:bg-gray-500 outline-none w-full' type="text" placeholder='search . . .' />
+                    <div className="dark:bg-white w-3/4 border border-gray-200 rounded-lg p-2">
+                        <input className='dark:bg-white outline-none w-full' type="text" placeholder='search . . .' />
                     </div>
                     <div className="flex items-center justify-center gap-x-4">
                         {

@@ -2,6 +2,7 @@ import ButtonLoading from '@/components/atoms/ButtonLoading'
 import Footer from '@/components/moleculs/Footer'
 import Navbar from '@/components/moleculs/Navbar'
 import CustomAxios from '@/config/axios'
+import { RootState } from '@/store/reducers'
 import moment from 'moment'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
@@ -9,11 +10,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { RiDeleteBin6Fill, RiLoader2Fill } from 'react-icons/ri'
+import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 type Props = {}
 
-type SingleArticles = {
+export type SingleArticles = {
   content: string
   createdAt: string
   likes: null | number
@@ -28,7 +30,8 @@ type CommentArticle = {
   createdAt: string,
   photo: string,
   username: string,
-  comment_id: string
+  comment_id: string,
+  user_id: string
 }
 
 const SingleArticles = (props: Props) => {
@@ -63,6 +66,7 @@ const SingleArticles = (props: Props) => {
     setIsLoading(false)
   }
 
+  const user = useSelector((state: RootState) => state.auth.id)
   useEffect(() => {
     if (id) {
       getSingleArticle()
@@ -108,8 +112,13 @@ const SingleArticles = (props: Props) => {
   const deleteComment = async (id: string) => {
     setIsLoadDeleteComment(true)
     try {
-      const data = await CustomAxios.patch(`/comment/${id}`)
-      console.log({ data });
+      const data = await CustomAxios.patch(`/comment/delete/`, {
+        comment_id : id
+      })
+      if(data.status == 200){
+        toast.success("Berhasil menghapus komentar")
+        getComment();
+      }
     } catch (error) {
       console.log({ error });
       toast.error("Terjadi kesalahan, coba lagi nanti")
@@ -143,21 +152,24 @@ const SingleArticles = (props: Props) => {
             commentArticles.map((item, index) => (
               <div key={index} className="flex items-center gap-x-4">
                 <div className="h-16 w-16 rounded-full border border-gray-200 ">
-                  <Image className='h-16 w-16 rounded-full' height={200} width={200} src={item.photo} alt='photo' />
+                  <Image className='h-16 w-16 rounded-full object-cover' height={200} width={200} src={item.photo} alt='photo' />
                 </div>
                 <div className="flex flex-col">
                   <div className="text-sm font-bold">{item.username}</div>
                   <div className="username text-md">{item.content}</div>
                 </div>
-                <div onClick={() => {
-                  deleteComment(item?.comment_id)
-                }} className="text-red ml-4 cursor-pointer">
-                  {
-                    isLoadDeleteComment ?
-                      <RiLoader2Fill className="text-red-400" /> :
-                      <RiDeleteBin6Fill className="text-red-400" />
-                  }
-                </div>
+                {
+                  user == item.user_id &&
+                  <div onClick={() => {
+                    deleteComment(item?.comment_id)
+                  }} className="text-red ml-4 cursor-pointer">
+                    {
+                      isLoadDeleteComment ?
+                        <RiLoader2Fill className="text-red-400" /> :
+                        <RiDeleteBin6Fill className="text-red-400" />
+                    }
+                  </div>
+                }
               </div>
             ))
           }

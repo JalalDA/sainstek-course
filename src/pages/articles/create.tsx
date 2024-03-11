@@ -28,7 +28,7 @@ const CreateArticles = (props: Props) => {
     const [title, setTitle] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const handleChange = (content: string, delta: any, source: string, editor: any) => {
-        // Kode yang akan dijalankan saat isi editor berubah
+
         setValue(content);
     };
     const ReactQuill = useMemo(

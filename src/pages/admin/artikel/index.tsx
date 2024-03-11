@@ -8,7 +8,7 @@ import { tabKelas } from '@/static'
 import { ArticlesType } from '@/types'
 import axios from 'axios'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { FaHeart, FaRegComment, FaShare } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
@@ -45,7 +45,12 @@ const Artikel = () => {
         {
           articles.map((item, index) => (
             <div key={index} className="border-gray border p-4 w-72 rounded-lg ">
-              <div onClick={() => router.push(`/articles/${item.articles_id}`)} className="text-xl font-bold mb-2 cursor-pointer">{item.title}</div>
+              <div onClick={() => router.push({
+                pathname : item.title && `/admin/artikel/${item?.title.split(" ").join("-").toLocaleLowerCase()}`,
+                query : {
+                    id : item?.articles_id
+                }
+              })} className="text-xl font-bold mb-2 cursor-pointer">{item.title}</div>
               <div dangerouslySetInnerHTML={{ __html: item.content || "" }} className="text-md h-[210px] w-full overflow-hidden"></div>
               <div className="mt-4">
                 <div className="flex items-center justify-end gap-x-4 pt-2 border-t-2 border-gray-200">
