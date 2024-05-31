@@ -49,16 +49,6 @@ const TambahKelas = (props: Props) => {
         try {
             const data = await CustomAxios.post('/course',
                 formData
-                // {
-                //     name,
-                //     price_down,
-                //     price_top,
-                //     duration,
-                //     about,
-                //     for_who,
-                //     requirement,
-                //     will_learn
-                // }
             )
             if (data.status === 200) {
                 toast.success("Berhasil menambahkan kelas")

@@ -35,6 +35,10 @@ const Navbar = ({ bgcolor = "" }: NavbarProps) => {
             name: "Artikel",
             route: "/articles"
         },
+        {
+            name : "Blogs",
+            route : "/blogs"
+        }
         // {
         //     name: "Tentang",
         //     route: "/about"

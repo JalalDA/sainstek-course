@@ -138,12 +138,12 @@ export interface ArticlesType {
   user_id?:string
 }
 
-export interface Lesson {
+export interface LessonType {
   comment: null;
   content: string;
   course_id: string;
   createdAt: string;
-  daysto: null;
+  daysto: string;
   deleted_at: null;
   lesson_id: string;
   likes: null;
@@ -162,4 +162,13 @@ export interface Application {
   deleted_at: string | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface SideNavItem {
+  title : string;
+  path : string;
+  icon? : JSX.Element;
+  submenu?:boolean;
+  subMenuItems?:SideNavItem[];
+  slug?:string
 }

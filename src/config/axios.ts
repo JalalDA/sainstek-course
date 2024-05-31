@@ -1,9 +1,13 @@
 import store from "@/store";
+import { logout } from "@/store/features/authSlice";
 import axios from "axios";
 
 
 const CustomAxios = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_APP_HOST}/${process.env.NEXT_PUBLIC_API_VERSION}`
+    baseURL: `${process.env.NEXT_PUBLIC_APP_HOST}/${process.env.NEXT_PUBLIC_API_VERSION}`,
+    headers : {
+        Authorization : ''
+    }
 })
 
 CustomAxios.interceptors.request.use(
@@ -23,7 +27,9 @@ CustomAxios.interceptors.request.use(
 CustomAxios.interceptors.response.use(
     (response) => {
         // Modify the response data here
-
+        if(response.status === 401){
+            store.dispatch(logout(""))
+        }
         return response;
     },
     (error) => {

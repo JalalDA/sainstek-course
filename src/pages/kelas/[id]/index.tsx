@@ -4,12 +4,14 @@ import Footer from '@/components/moleculs/Footer'
 import Navbar from '@/components/moleculs/Navbar'
 import CustomAxios from '@/config/axios'
 import { formatter } from '@/config/formatter'
+import { RootState } from '@/store/reducers'
 import { OnlineClass } from '@/types'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
 
 
@@ -17,7 +19,11 @@ const SingleKelas = ({repo}: InferGetServerSidePropsType<typeof getServerSidePro
     const [isLoadingPay, setIsLoadingPay] = useState(false)
     const router = useRouter()
 
+    const token = useSelector((state:RootState)=>state.auth.token)
     const checkout = async ()=>{
+        if(!token){
+            return toast.error("Please login first")
+        }
         setIsLoadingPay(true)
         try {
             const {data} = await CustomAxios.post(`/transaction/snap`, {

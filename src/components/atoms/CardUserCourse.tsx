@@ -16,7 +16,7 @@ const CardUserCourse = ({ item }: Props) => {
         <div className="flex items-start gap-x-4">
             <div onClick={() => {
 
-            }} className='rounded-lg cursor-pointer hover:scale-105 transition-all ease-linear duration-300 w-48 md:w-72 bg-white dark:bg-[#333333] shadow-xl'>
+            }} className='rounded-lg cursor-pointer hover:scale-105 transition-all ease-linear duration-300 w-48 md:w-72 bg-white dark:bg-white shadow-xl'>
                 <Image src={item.photo || ""} alt='Fullstack Development' height={100} width={100} className='w-full h-48 w-46 rounded-t-lg' />
                 <div className="p-4 w-full">
                     <div className="text-md font-bold">{item.name}</div>

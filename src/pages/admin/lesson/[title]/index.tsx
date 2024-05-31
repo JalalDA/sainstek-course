@@ -1,22 +1,17 @@
 import Button from '@/components/atoms/Button'
 import ButtonLoading from '@/components/atoms/ButtonLoading'
 import Layout from '@/components/moleculs/admin/Layout'
-import Modal from '@/components/moleculs/modals/Modal'
 import CustomAxios from '@/config/axios'
-import { tabKelas } from '@/static'
-import { Lesson } from '@/types'
+import { LessonType } from '@/types'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import dynamic from 'next/dynamic'
-import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { RiLoader2Line } from 'react-icons/ri'
+import React, { useEffect, useMemo, useState } from 'react'
 import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify'
 
 
-type Props = {}
-
-const Lesson = (props: Props) => {
+const Lesson = ({ repo }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const router = useRouter()
     const { id } = router.query
     const [content, setContent] = useState("")
@@ -25,8 +20,6 @@ const Lesson = (props: Props) => {
     const [daysto, setDaysTo] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const [isPreview, setIsPreview] = useState(false)
-    const [isLoadingLesson, setIsLoadingLesson] = useState(false)
-    const [lessons, setLessons] = useState<Lesson[] >([])
 
     const createLesson = async () => {
         setIsLoading(true)
@@ -34,7 +27,8 @@ const Lesson = (props: Props) => {
             const data = await CustomAxios.post(`/lesson`, {
                 course_id: id,
                 title,
-                content
+                content,
+                daysto
             })
             if (data.status === 200) {
                 toast.success("Berhasil menambahkan materi")
@@ -45,26 +39,10 @@ const Lesson = (props: Props) => {
         setIsLoading(false)
     }
 
-    const getLessonByCourseId = async()=>{
-        setIsLoadingLesson(true)
-        try {
-            const {data} = await CustomAxios.post(`/lesson/course`, {course_id : id})
-            setLessons(data?.data)
-        } catch (error) {
-            console.log({error});
-            
-        }
-        setIsLoadingLesson(false)
-    }
-
     const ReactQuill = useMemo(
         () => dynamic(() => import("react-quill"), { ssr: false }),
         [],
     );
-
-    useEffect(()=>{
-        getLessonByCourseId();
-    }, [])
 
     return (
         <Layout title={"Buat Materi Baru"}>
@@ -122,13 +100,18 @@ const Lesson = (props: Props) => {
                 }
             </div>
             {
-                isLoadingLesson ? 
-                <RiLoader2Line className={"h-32 w-23 text-blue-500"}/> :
-                lessons.map((item, index)=>(
+                repo.map((item, index) => (
                     <div key={index} className="text-md bg-gray-200 p-4 mt-4 rounded-lg flex flex-col gap-1 ">
                         <div className="">{`Hari ke ${item?.daysto}`}</div>
                         <div className="text-md">{item?.title || ""}</div>
-                        <Button title='Update Materi'/>
+                        <Button onClick={()=>{
+                            router.push({
+                                pathname : `/admin/lesson/update/${item.title.split(" ").join("-").toLocaleLowerCase()}`,
+                                query : {
+                                    id : item?.lesson_id
+                                }
+                            })
+                        }} title='Update Materi' />
                     </div>
                 ))
             }
@@ -137,3 +120,13 @@ const Lesson = (props: Props) => {
 }
 
 export default Lesson
+
+export const getServerSideProps: GetServerSideProps<{
+    repo: LessonType[]
+}> = async (context) => {
+    const { query } = context
+    //@ts-ignore
+    const id = query.id
+    const data = await CustomAxios.post(`/lesson/course`, { course_id: id })
+    return { props: { repo: data?.data?.data[0] } }
+}

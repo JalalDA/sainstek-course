@@ -9,15 +9,9 @@ type Props = {}
 const Materi = (props: Props) => {
 
   const role = useSelector((state:RootState)=>state.auth.role)
-  const router = useRouter()
-
-  useEffect(()=>{
-      if(role !== "Admin"){
-          router.replace("/")
-      }
-  }, [])
+  
   return (
-    <LayoutMateri title='Materi'>
+    <LayoutMateri title='Introduction Frontend Development'>
         <div>Materi</div>
     </LayoutMateri>
   )
